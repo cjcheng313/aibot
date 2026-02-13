@@ -1,0 +1,6 @@
+date,store_id,order_id,item,revenue,labor_cost,waste_cost
+2026-02-10,tea-001,1001,Milk Tea,8.5,2.0,0.3
+2026-02-10,tea-001,1001,Boba,1.5,0,0
+2026-02-10,food-001,1002,Coffee,6.0,1.8,0.1
+2026-02-11,tea-001,1003,Milk Tea,9.0,2.2,0.2
+2026-02-11,food-001,1004,Snack,4.0,1.2,0.05
