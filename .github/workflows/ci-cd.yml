@@ -1,0 +1,29 @@
+name: CI-CD
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+
+jobs:
+  ci:
+    name: Lint/Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile check
+        run: |
+          python -m py_compile mvp_pos_insight_bot.py web_app.py
+
+      - name: Unit tests
+        run: |
+          python -m unittest -v test_mvp_pos_insight_bot.py
+

@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ai-store-assistant-mvp
+    env: python
+    plan: starter
+    buildCommand: "echo 'No build dependencies'"
+    startCommand: "python web_app.py --data-dir ./data --config ./data/sample_account.json --host 0.0.0.0 --port $PORT"
+    autoDeploy: true
+    healthCheckPath: /healthz
