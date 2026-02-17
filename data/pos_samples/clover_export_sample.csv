@@ -1,0 +1,5 @@
+date,store_id,receipt_id,item,amount,staff_cost,waste_cost
+2026-02-12,la-glendale,5001,Acai Bowl,11.50,2.80,0.25
+2026-02-12,la-glendale,5002,Cold Brew,5.50,1.50,0.06
+2026-02-13,la-burbank,5003,Avocado Toast,9.50,2.60,0.20
+2026-02-13,la-burbank,5004,Matcha Latte,6.50,1.70,0.10

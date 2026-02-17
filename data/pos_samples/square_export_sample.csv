@@ -1,0 +1,5 @@
+business_date,location_id,ticket_id,menu_item,net_sales,labor,spoilage
+2026-02-12,la-hollywood,2001,Iced Latte,7.50,1.90,0.15
+2026-02-12,la-hollywood,2001,Extra Shot,1.50,0.00,0.00
+2026-02-12,la-koreatown,2002,Milk Tea,8.00,2.10,0.20
+2026-02-13,la-koreatown,2003,Boba,2.00,0.00,0.00
