@@ -115,3 +115,107 @@ That means Render is deploying an older revision from GitHub, not your newest co
 
 If Build Command in Render dashboard is still `pip install -r requirements.txt`, change it once to:
 `echo 'No build dependencies'`
+
+
+## POS provider samples + end-to-end test
+
+To simulate imports from popular POS ecosystems commonly seen in large US metro markets (including LA), this repo now includes synthetic sample exports:
+
+- `data/pos_samples/square_export_sample.csv`
+- `data/pos_samples/toast_export_sample.csv`
+- `data/pos_samples/clover_export_sample.csv`
+
+These files use different column names (for example `business_date`, `location_id`, `ticket_id`, `net_sales`) to validate the bot's flexible column matching.
+
+### Run end-to-end tests
+
+```bash
+python3 -m unittest -v
+```
+
+### Manual test against one sample export
+
+```bash
+python3 mvp_pos_insight_bot.py --data-dir ./data/pos_samples
+```
+
+Then ask:
+- `what is my status today?`
+- `stores`
+- `show store la-burbank status`
+- `table`
+- `sms`
+
+### What data is currently included
+
+For each row in the samples, the bot currently extracts and computes:
+- date
+- store id/location
+- order/check/receipt id
+- item/product name
+- revenue/sales amount
+- labor/payroll/staff cost
+- waste/spoilage cost
+
+From that, it computes daily KPIs such as revenue, order count, average order value, labor ratio, waste ratio, and top-selling item.
+
+
+## Voice support (talk to the bot)
+
+The web chat now supports browser-native voice interactions:
+
+- **🎤 Speak**: speech-to-text for your question (Web Speech API).
+- **🔊 Voice Reply**: text-to-speech for bot responses (Speech Synthesis API).
+
+Run:
+
+```bash
+python3 web_app.py --data-dir ./data --config ./data/sample_account.json --port 8000
+```
+
+Open `http://localhost:8000`, click **🎤 Speak** to talk, and toggle **🔊 Voice Reply** to hear answers.
+
+> Note: voice input availability depends on browser support/permissions (Chrome-family browsers usually work best).
+
+
+## Owner dashboard view (trust with raw numbers)
+
+The web app now includes a dashboard panel so owners can verify the exact metrics behind AI responses.
+
+What the dashboard shows:
+- total revenue
+- total orders
+- average order value
+- labor ratio
+- waste ratio
+- top item
+- per-store breakdown table (revenue, orders, avg order, labor %, waste %)
+
+Run:
+
+```bash
+python3 web_app.py --data-dir ./data --config ./data/sample_account.json --port 8000
+```
+
+Open `http://localhost:8000` and use the **Owner Dashboard (numbers view)** panel on the right.
+
+
+## Testing rule for every change
+
+For every new feature or code change, run end-to-end validation before merge:
+
+1. `python3 -m py_compile mvp_pos_insight_bot.py web_app.py`
+2. `python3 -m unittest discover -v`
+
+The test suite includes function-level tests plus HTTP end-to-end checks (`test_web_app_e2e.py`) for `/healthz`, `/api/dashboard`, and `/api/chat`.
+
+This is a required quality gate for this repo so behavior stays reliable as features grow.
+
+
+## Mobile-first UI
+
+The web app layout is now mobile-first:
+- chat and dashboard stack vertically on small screens
+- touch-friendly controls with larger input/button tap targets
+- dashboard table uses horizontal scrolling on phones
+- desktop layout expands into a two-column view at larger widths

@@ -1,0 +1,5 @@
+transaction_date,store,check_id,product,total_sales,payroll,waste
+2026-02-12,la-downtown,3101,Burger,14.00,3.50,0.40
+2026-02-12,la-downtown,3101,Fries,4.00,0.00,0.05
+2026-02-12,la-pasadena,3102,Salad,10.00,2.90,0.30
+2026-02-13,la-pasadena,3103,Coffee,5.00,1.40,0.08

@@ -25,5 +25,5 @@ jobs:
 
       - name: Unit tests
         run: |
-          python -m unittest -v test_mvp_pos_insight_bot.py
+          python -m unittest discover -v
 
