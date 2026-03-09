@@ -207,15 +207,4 @@ For every new feature or code change, run end-to-end validation before merge:
 1. `python3 -m py_compile mvp_pos_insight_bot.py web_app.py`
 2. `python3 -m unittest discover -v`
 
-The test suite includes function-level tests plus HTTP end-to-end checks (`test_web_app_e2e.py`) for `/healthz`, `/api/dashboard`, and `/api/chat`.
-
 This is a required quality gate for this repo so behavior stays reliable as features grow.
-
-
-## Mobile-first UI
-
-The web app layout is now mobile-first:
-- chat and dashboard stack vertically on small screens
-- touch-friendly controls with larger input/button tap targets
-- dashboard table uses horizontal scrolling on phones
-- desktop layout expands into a two-column view at larger widths

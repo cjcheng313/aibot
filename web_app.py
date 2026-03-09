@@ -17,37 +17,26 @@ HTML = """<!doctype html>
   <meta name='viewport' content='width=device-width, initial-scale=1'/>
   <title>AI Store Assistant MVP</title>
   <style>
-    *{box-sizing:border-box}
-    body{font-family:Arial,sans-serif;margin:0;padding:10px;background:#f6f7fb;color:#111}
-    h2{margin:8px 0 12px 0;font-size:1.25rem}
-    .layout{display:grid;grid-template-columns:1fr;gap:12px}
-    .panel{border:1px solid #ddd;border-radius:10px;padding:10px;background:#fff}
-    .chat{border:1px solid #ddd;border-radius:8px;padding:10px;height:45vh;min-height:260px;max-height:480px;overflow:auto;background:#fafafa}
-    .msg{margin:8px 0;padding:8px 10px;border-radius:8px;max-width:95%;white-space:pre-wrap;font-size:14px;line-height:1.35}
+    body{font-family:Arial,sans-serif;max-width:1100px;margin:20px auto;padding:0 12px}
+    .layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:16px}
+    .panel{border:1px solid #ddd;border-radius:10px;padding:12px;background:#fff}
+    .chat{border:1px solid #ddd;border-radius:8px;padding:12px;height:380px;overflow:auto;background:#fafafa}
+    .msg{margin:10px 0;padding:8px 10px;border-radius:8px;max-width:90%;white-space:pre-wrap}
     .you{background:#dff1ff;margin-left:auto}
     .bot{background:#ececec}
-    .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:stretch}
-    input{flex:1 1 100%;width:100%;min-width:0;padding:12px;font-size:16px}
-    button{flex:1 1 calc(50% - 8px);min-height:42px;padding:10px 12px;border:1px solid #bbb;border-radius:8px;background:#fff;cursor:pointer;font-size:14px}
+    .row{display:flex;gap:8px;margin-top:10px;align-items:center}
+    input{flex:1;padding:10px}
+    button{padding:10px 14px;border:1px solid #bbb;border-radius:6px;background:#fff;cursor:pointer}
     button:hover{background:#f5f5f5}
-    .hint{color:#666;font-size:12px;line-height:1.35;margin-bottom:6px}
+    .hint{color:#666;font-size:13px;margin-bottom:6px}
     .status{font-size:12px;color:#555;min-height:16px;margin-top:6px}
-    .kpis{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:10px}
+    .kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
     .kpi{background:#f7f7f9;border:1px solid #ececf0;border-radius:8px;padding:8px}
     .kpi .label{font-size:12px;color:#666}
     .kpi .value{font-weight:700;margin-top:4px}
-    .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-    table{width:100%;min-width:560px;border-collapse:collapse;font-size:13px}
-    th,td{border-bottom:1px solid #eee;padding:6px;text-align:left;white-space:nowrap}
-    @media (min-width:900px){
-      body{max-width:1100px;margin:20px auto;padding:0 12px;background:#fff}
-      .layout{grid-template-columns:1.1fr 0.9fr;gap:16px}
-      .panel{padding:12px}
-      .row{flex-wrap:nowrap;align-items:center}
-      input{flex:1 1 auto;width:auto}
-      button{flex:0 0 auto;min-height:unset}
-      .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
-    }
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{border-bottom:1px solid #eee;padding:6px;text-align:left}
+    @media (max-width:900px){.layout{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -74,7 +63,6 @@ HTML = """<!doctype html>
       </div>
       <div class='hint'>Use this panel to verify the exact metrics behind AI answers.</div>
       <div id='kpis' class='kpis'></div>
-      <div class='table-wrap'>
       <table>
         <thead>
           <tr>
@@ -88,7 +76,6 @@ HTML = """<!doctype html>
         </thead>
         <tbody id='storeRows'></tbody>
       </table>
-      </div>
     </section>
   </div>
 <script>
